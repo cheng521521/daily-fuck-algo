@@ -9,7 +9,7 @@ public class MergeTwoLists {
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         //设置一个虚拟节点
-        ListNode dummy  = new ListNode();
+        ListNode dummy  = new ListNode(-1);
         dummy .setVal(-1);
         ListNode p = dummy;
         while (l1 != null && l2 != null) {
@@ -36,20 +36,20 @@ public class MergeTwoLists {
 
 
     public static void main(String[] args) {
-        ListNode l = new ListNode();
+        ListNode l = new ListNode(1);
         l.setVal(1);
-        ListNode l1 = new ListNode();
+        ListNode l1 = new ListNode(3);
         l1.setVal(3);
-        ListNode l2 = new ListNode();
+        ListNode l2 = new ListNode(5);
         l2.setVal(5);
         l.setNext(l1);
         l1.setNext(l2);
 
-        ListNode p = new ListNode();
+        ListNode p = new ListNode(2);
         p.setVal(2);
-        ListNode p1 = new ListNode();
+        ListNode p1 = new ListNode(4);
         p1.setVal(4);
-        ListNode p2 = new ListNode();
+        ListNode p2 = new ListNode(7);
         p2.setVal(7);
         p.setNext(p1);
         p1.setNext(p2);
