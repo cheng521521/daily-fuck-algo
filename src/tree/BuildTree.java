@@ -41,4 +41,33 @@ public class BuildTree {
                 inorder, index +1, inEnd);
         return root;
     }
+
+    //从中序和后序遍历构造二叉树
+    TreeNode buildTreee(int[] inorder, int[] postorder) {
+        return travel(inorder,0,inorder.length-1,
+                postorder,0,postorder.length-1);
+    }
+
+    TreeNode travel(int[] inorder, int start_in, int end_in,
+                    int[] postorder, int start_po, int end_po) {
+        //base case
+        if (start_in > end_in)return null;
+        int rootValue = postorder[end_po];
+        int rootIndex = Integer.MIN_VALUE;
+        for (int i = start_in; i < end_in; i++) {
+            if (rootValue == inorder[i]) {
+                rootIndex = i;
+                break;
+            }
+        }
+        //这里为什么要用leftSize？假如不用leftSize,我用的是rootIndex。因为rootIndex只是在中序中的rootIndex.后序是描述不出来的
+        int leftSize = rootIndex - start_in;
+        TreeNode root = new TreeNode(rootValue);
+        //这里变量的意义在于你要构建左子树，那么就要要描述出来中序和后序的左子树
+        root.left = travel(inorder, start_in, rootIndex -1,
+                postorder, start_po, start_po + leftSize - 1);
+        root.right = travel(inorder, rootIndex +1, end_in,
+                postorder, start_po + leftSize, end_po-1);
+        return root;
+    }
 }
