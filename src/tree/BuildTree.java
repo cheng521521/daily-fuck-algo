@@ -1,6 +1,8 @@
 package tree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @ClassName BuildTree
@@ -69,5 +71,9 @@ public class BuildTree {
         root.right = travel(inorder, rootIndex +1, end_in,
                 postorder, start_po + leftSize, end_po-1);
         return root;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
     }
 }

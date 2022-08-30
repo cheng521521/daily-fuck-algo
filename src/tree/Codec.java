@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,8 +24,18 @@ public class Codec {
     }
 
     // 把字符串反序列化成二叉树
-    public TreeNode deserialize(List<String> result) {
-
+    public TreeNode deserialize(LinkedList<String> result) {
+        if (result.size() == 0) {
+            return null;
+        }
+        String nodeValue = result.removeFirst();
+        if (nodeValue.equals("#")) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.valueOf(nodeValue));
+        root.left = deserialize(result);
+        root.right = deserialize(result);
+        return root;
     }
 
     public static void main(String[] args) {
@@ -37,6 +48,16 @@ public class Codec {
         TreeNode root1 = new TreeNode(6);
         root.left.right = root1;
         codec.serialize(root);
+        LinkedList<String> stringList = new LinkedList<>();
+        for (String s : codec.result) {
+            System.out.print(s);
+            stringList.add(s);
+        }
+        System.out.println();
+        System.out.println("--------------------------");
+        TreeNode deserialize = codec.deserialize(stringList);
+        codec.result.clear();
+        codec.serialize(deserialize);
         for (String s : codec.result) {
             System.out.print(s);
         }
